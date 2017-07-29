@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
-import './App.css';
-import ChannelsListWithData from './components/ChannelsListWithData';
+import React, { Component } from "react";
+import "./App.css";
+import ChannelsListWithData from "./components/ChannelsListWithData";
 
 import {
   ApolloClient,
   ApolloProvider,
-  createNetworkInterface,
-} from 'react-apollo';
+  createNetworkInterface
+} from "react-apollo";
 
+const networkInterface = createNetworkInterface({
+  uri: "http://localhost:4000/graphql"
+});
 
-const networkInterface = createNetworkInterface({ uri: 'http://localhost:4000/graphql' });
+networkInterface.use([
+  {
+    applyMiddleware(req, next) {
+      setTimeout(next, 500);
+    }
+  }
+]);
 
 const client = new ApolloClient({
-  networkInterface,
+  networkInterface
 });
 
 class App extends Component {
