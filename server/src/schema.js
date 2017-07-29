@@ -1,9 +1,6 @@
-import {
-  makeExecutableSchema,
-  addMockFunctionsToSchema,
-} from 'graphql-tools';
+import { makeExecutableSchema, addMockFunctionsToSchema } from "graphql-tools";
 
-import { resolvers } from './resolvers';
+import { resolvers } from "./resolvers";
 
 const typeDefs = `
 type Channel {
@@ -32,6 +29,10 @@ type Query {
 type Mutation {
   addChannel(name: String!): Channel
   addMessage(message: MessageInput!): Message
+}
+
+type Subscription {
+  messageAdded(channelId: ID!): Message
 }
 `;
 
